@@ -38,17 +38,22 @@ if ! [ -d ~/.oh-my-zsh ]; then
     cp ~/.zshrc ~/.zshrc.orig 2> /dev/null
 fi
 
-# Symlink .zshrc
+# Sync .zshrc
 echo "Sync .zshrc"
 rsync -avh --no-perms .zshrc $HOME/.zshrc
 
-# Symlink theme
+# Sync theme
 echo "Sync xxf theme"
 rsync -avh --no-perms xxf.zsh-theme $HOME/.oh-my-zsh/themes/xxf.zsh-theme
 
-# Symlink vim config
+# Sync vim config
 echo "Sync vimrc"
 rsync -avh --no-perms .vimrc $HOME/.vimrc
+
+# Sync vim colors
+echo "Sync vim colors"
+mkdir -p $HOME/.vim/colors
+rsync -avh --no-perms monokai.vim $HOME/.vim/colors/monokai.vim
 
 # Insert conf files into zshrc
 if [ -e $PWD/.aliases ]; then
