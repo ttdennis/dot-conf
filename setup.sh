@@ -16,7 +16,7 @@ fi
 if [ ! -z $INSTALL ]; then
     if [ $(which apt-get) ]; then
         sudo apt-get install $INSTALL
-        elif [ $(which brew) ]; then
+    elif [ $(which brew) ]; then
         brew install $INSTALL
 	elif [ $(which yum) ]; then
     	sudo yum install $INSTALL
@@ -39,13 +39,11 @@ if ! [ -d ~/.oh-my-zsh ]; then
     cp ~/.zshrc ~/.zshrc.orig 2> /dev/null
 fi
 
-# Download xxf theme
-if ! [ -f ~/.oh-my-zsh/themes/xxf.zsh-theme ]; then
-    curl -Lo ~/.oh-my-zsh/themes/xxf.zsh-theme https://gist.githubusercontent.com/xfanwu/18fd7c24360c68bab884/raw/f09340ac2b0ca790b6059695de0873da8ca0c5e5/xxf.zsh-theme > /dev/null
-fi
+# Symlink .zshrc
+ln -s .zshrc ~/.zshrc
 
-# Copy .zshrc
-cp .zshrc ~/.zshrc
+# Symlink theme
+ln -s xxf.zsh-theme ~/.oh-my-zsh/themes/xxf.zsh-theme
 
 # Insert conf files into zshrc
 if [ -e $PWD/.aliases ]; then
@@ -62,7 +60,3 @@ for f in $(ls -a ~ | grep \.\*aliases\.\*); do
 	echo "source ~/$f" >> ~/.zshrc
     echo "Added $f as source in zshrc"
 done
-
-# insert Profile path in zprofile
-echo "PATH=$(echo $PATH)" >> /etc/zsh/zprofile
-echo "export PATH" >> /etc/zsh/zprofile
