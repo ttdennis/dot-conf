@@ -1,5 +1,4 @@
-#!/bin/sh
-INSTALL=""
+NSTALL=""
 # Install zsh and change standard shell
 if [ $(which zsh) ]; then
     echo "ZSH already installed"
@@ -40,10 +39,10 @@ if ! [ -d ~/.oh-my-zsh ]; then
 fi
 
 # Symlink .zshrc
-ln -s .zshrc ~/.zshrc
+rsync -avh --no-perms .zshrc $HOME/.zshrc
 
 # Symlink theme
-ln -s xxf.zsh-theme ~/.oh-my-zsh/themes/xxf.zsh-theme
+rsync -avh --no-perms xxf.zsh-theme $HOME/.oh-my-zsh/themes/xxf.zsh-theme
 
 # Insert conf files into zshrc
 if [ -e $PWD/.aliases ]; then
