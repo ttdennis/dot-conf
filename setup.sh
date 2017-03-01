@@ -39,10 +39,16 @@ if ! [ -d ~/.oh-my-zsh ]; then
 fi
 
 # Symlink .zshrc
+echo "Sync .zshrc"
 rsync -avh --no-perms .zshrc $HOME/.zshrc
 
 # Symlink theme
+echo "Sync xxf theme"
 rsync -avh --no-perms xxf.zsh-theme $HOME/.oh-my-zsh/themes/xxf.zsh-theme
+
+# Symlink vim config
+echo "Sync vimrc"
+rsync -avh --no-perms .vimrc $HOME/.vimrc
 
 # Insert conf files into zshrc
 if [ -e $PWD/.aliases ]; then
